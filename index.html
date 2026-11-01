@@ -172,7 +172,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
         }
 
-        /* نافذة العرض المنبثقة (Modal) */
+        /* نافذة العرض المنبثقة (Modal) المحدثة للهواتف */
         .modal {
             display: none;
             position: fixed;
@@ -181,44 +181,56 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.7);
             overflow-y: auto;
-            padding: 20px;
+            padding: 10px;
         }
         .modal-content {
             background-color: #fff;
-            margin: 4% auto;
-            padding: 35px;
+            margin: 2% auto;
+            padding: 25px;
             border-radius: 12px;
             max-width: 800px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             position: relative;
             line-height: 2;
         }
-        .close-btn {
-            color: #aaa;
-            position: absolute;
-            left: 25px;
-            top: 20px;
-            font-size: 28px;
+        
+        /* شريط التحكم العلوي داخل النافذة (للخروج السريع والتنقل) */
+        .modal-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        .close-btn-main {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s;
         }
-        .close-btn:hover {
-            color: #000;
+        .close-btn-main:hover {
+            background-color: #bb2d3b;
         }
+
         .modal-img {
             width: 100%;
-            max-height: 350px;
+            max-height: 300px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .modal-title {
             color: var(--secondary-color);
             margin-top: 0;
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 10px;
+            font-size: 1.5rem;
         }
         .modal-body {
             color: #222;
@@ -230,6 +242,29 @@
             margin-top: 25px;
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 8px;
+        }
+
+        /* أزرار التنقل بين المقالات (السابق / التالي) في أسفل المقال */
+        .modal-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 2px solid #e2e8f0;
+        }
+        .nav-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover {
+            background-color: #1a252f;
         }
 
         /* تنسيق حاوية الإعلان داخل المقال */
@@ -302,13 +337,23 @@
         </div>
     </div>
 
-    <!-- نافذة العرض المنبثقة -->
+    <!-- نافذة العرض المنبثقة (Modal) المحدثة مع أزرار الخروج والتنقل السريع -->
     <div id="articleModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-header-bar">
+                <button class="close-btn-main" onclick="closeModal()">✕ إغلاق والعودة للرئيسية</button>
+                <span style="color: #64748b; font-size: 0.9rem; font-weight: bold;">موسوعة صحيح الطبية</span>
+            </div>
+            
             <img id="modalImg" class="modal-img" src="" alt="صورة المقال">
             <h2 id="modalTitle" class="modal-title"></h2>
             <div id="modalBody" class="modal-body"></div>
+
+            <!-- أزرار الانتقال للمقال السابق أو التالي بداخل النافذة -->
+            <div class="modal-navigation">
+                <button class="nav-btn" id="prevBtn" onclick="navigateArticle(-1)">← المقال السابق</button>
+                <button class="nav-btn" id="nextBtn" onclick="navigateArticle(1)">المقال التالي →</button>
+            </div>
         </div>
     </div>
 
@@ -337,7 +382,7 @@
             </div>
         `;
 
-        // قاعدة البيانات المتكاملة للمقالات (تضم المقالات السبعة مع إعادة صياغة آمنة وفريدة)
+        // قاعدة البيانات المتكاملة للمقالات التسعة
         const articlesData = [
             {
                 title: "كيف تتخلص من وجع البطن",
@@ -496,8 +541,37 @@
                         <li>الاستخدام المفرط وطويل الأمد لمسكنات الألم والذي قد يؤدي إلى ارتداد الصداع وتفاقمه.</li>
                     </ul>
                 `
+            },
+            {
+                title: "أسباب ألم الرأس من الخلف والتشخيص الإكلينيكي",
+                desc: "دراسة طبية أكاديمية متقدمة حول مسببات ألم الجزء الخلفي من الرأس، ارتباطه بصداع التوتر، الشقيقة، والتهاب الأعصاب القذالية.",
+                image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
+                content: `
+                    <h2>مقدمة وتحليل علمي تخصصي</h2>
+                    <p>يُعد <strong>ألم الرأس من الخلف (Occipital and Posterior Head Pain)</strong> عرضاً طبياً يستوجب التقييم الدقيق؛ نظراً لتعدد المسببات العضوية والعضلية والعصبية المرتبطة بهذه المنطقة من الجمجمة والرقبة. يعتمد تحديد المصدر الأساسي للألم على تقييم طبيعة الانقباضات، موقع التموضع، والأعراض السريرية المرافقة.</p>
+                    
+                    <h3>أولاً: المسببات الشائعة لألم مؤخرة الرأس</h3>
+                    <ul>
+                        <li><strong>صداع التوتر العضلي (Tension Headaches):</strong> يُشكل المسبب الأبرز والأكثر شيوعاً، وغالباً ما يترافق مع فترات إجهاد مطولة، قلة النوم، احتقان الجيوب، أو إهمال الترطيب الكافي والوجبات الغذائية المنتظمة، وتتراوح مدة الهجمة بين نصف ساعة وعدة أيام.</li>
+                        <li><strong>الصداع النصفي (Migraine):</strong> رغم تموضعه الجانبي غالباً، إلا أن نوبات الشقيقة قد تمتد وتترافق بخفقان شديد، غثيان، واضطرابات بصرية وحسية تحفزها التغيرات الهرمونية والتوتر النفسي.</li>
+                        <li><strong>الألم العصبي الرقبي القذالي (Occipital Neuralgia):</strong> ينجم عن التهاب أو ضغط مباشر على الأعصاب القذالية الممتدة من قمة الحبل الشوكي عبر فروة الرأس، مسبباً ألماً نابضاً يمتد أحياناً نحو العينين ومحيط الرقبة.</li>
+                    </ul>
+
+                    ${adCodeHTML}
+
+                    <h3>ثانياً: متى يصبح ألم الرأس من الخلف مؤشراً لمراجعة الطبيب؟</h3>
+                    <p>تستدعي الحالة استشارة طبية عاجلة وتقييماً تشخيصياً متعمقاً في الظروف التالية:</p>
+                    <ul>
+                        <li>ظهور نمط صداع חדّ أو جديد كلياً ومستمر لأكثر من بضعة أيام متواصلة.</li>
+                        <li>تأثير الألم بشكل مباشر وعيق قدرة المصاب على أداء مهامه وأنشطته اليومية الاعتيادية.</li>
+                        <li>ملاحظة تغيرات غير مفسرة في طبيعة أو حدة الصداع المتكرر.</li>
+                        <li>ترافق الألم مع أعراض موضعية قريبة من منطقة الصدغ تستوجب استبعاد المشكلات الوعائية.</li>
+                    </ul>
+                `
             }
         ];
+
+        let currentArticleIndex = 0;
 
         // تعبئة شريط آخر المقالات تلقائياً (آخر 5 مقالات)
         const ticker = document.getElementById('tickerContent');
@@ -538,6 +612,7 @@
         const modalImg = document.getElementById('modalImg');
 
         function openModal(index) {
+            currentArticleIndex = index;
             modalImg.style.display = 'block';
             modalTitle.innerText = articlesData[index].title;
             modalImg.src = articlesData[index].image;
@@ -545,11 +620,26 @@
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
 
+            // تحديث حالة أزرار التنقل (السابق / التالي)
+            document.getElementById('prevBtn').style.display = index > 0 ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = index < articlesData.length - 1 ? 'block' : 'none';
+
+            // التمرير لأعلى النافذة عند فتحها لضمان رؤية العنوان
+            modal.scrollTop = 0;
+
             // تفعيل إعلانات أدسنس داخل النافذة المنبثقة
             try {
                 (adsbygoogle = window.adsbygoogle || []).push({});
             } catch (e) {
                 console.log("Adsbygoogle error: ", e);
+            }
+        }
+
+        // دالة الانتقال للمقال السابق أو التالي مباشرة
+        function navigateArticle(direction) {
+            const newIndex = currentArticleIndex + direction;
+            if (newIndex >= 0 && newIndex < articlesData.length) {
+                openModal(newIndex);
             }
         }
 
@@ -567,6 +657,8 @@
                 <h3>4. إخلاء المسؤولية الطبية</h3>
                 <p>المحتوى المنشور في الموقع هو لأغراض التثقيف والتوعية العلمية فقط، ولا يُغني عن الاستشارة الطبية التخصصية أو التشخيص المعتمد.</p>
             `;
+            document.getElementById('prevBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
@@ -576,6 +668,7 @@
             document.body.style.overflow = 'auto';
         }
 
+        // إغلاق النافذة عند النقر خارجها
         window.onclick = function(event) {
             if (event.target == modal) {
                 closeModal();

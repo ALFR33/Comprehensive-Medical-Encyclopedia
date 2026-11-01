@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونة صحيح - الموسوعة الطبية الشاملة</title>
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #2c3e50;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e2e8f0;
+        }
+        body {
+            font-family: 'Cairo', Tahoma, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            color: #ffffff;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 1.2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            border-right: 5px solid var(--primary-color);
+            padding-right: 15px;
+        }
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+        }
+        .article-card h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            font-size: 1.35rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+        .article-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .read-more {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        .read-more:hover {
+            background-color: #0b5ed7;
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #2c3e50;
+            color: #ffffff;
+            margin-top: 60px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>مدونة صحيح (heib12.com)</h1>
+        <p>الموسوعة العلمية الطبية الشاملة - إشراف ومراجعة: heib12</p>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">أرشيف المقالات الطبية الموسوعية</h2>
+        
+        <div class="articles-grid">
+            
+            <!-- 1 -->
+            <div class="article-card">
+                <div>
+                    <h3>علاج سرطان الكبد</h3>
+                    <p>دليل شامل حول الخيارات الجراحية، العلاجات الموضعية الموجهة، والعلاجات الجهازية الحديثة والمناعية لسرطان الكبد.</p>
+                </div>
+                <a href="liver-cancer-treatment.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 2 -->
+            <div class="article-card">
+                <div>
+                    <h3>سرطان الدم عند الأطفال</h3>
+                    <p>موسوعة علمية حول أنواع اللوكيميا، الأعراض التحذيرية المبكرة، ونسب الشفاء المرتفعة بفضل البروتوكولات الحديثة.</p>
+                </div>
+                <a href="pediatric-leukemia.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 3 -->
+            <div class="article-card">
+                <div>
+                    <h3>أعراض سرطان الأمعاء</h3>
+                    <p>العلامات التحذيرية المبكرة لتغيرات الإخراج، النزيف الخفي، وأهمية تنظير القولون للاكتشاف المبكر.</p>
+                </div>
+                <a href="intestinal-cancer-symptoms.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 4 -->
+            <div class="article-card">
+                <div>
+                    <h3>أعراض سرطان الخصية</h3>
+                    <p>دليل توعوي حول الكتل الصلبة، الفحص الذاتي المنتظم، والفرق بين الحالات الحميدة والأورام الخبيثة.</p>
+                </div>
+                <a href="testicular-cancer-symptoms.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 5 -->
+            <div class="article-card">
+                <div>
+                    <h3>ما هو سرطان البروستاتا</h3>
+                    <p>تعريف شامل بغدة البروستاتا، أعراض تضيق مجرى البول، فحوصات دلالات الأورام، والخيارات العلاجية.</p>
+                </div>
+                <a href="prostate-cancer.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 6 -->
+            <div class="article-card">
+                <div>
+                    <h3>أعراض سرطان فم المعدة</h3>
+                    <p>استعراض دقيق لأعراض المنطقة الفؤادية، صعوبة البلع المزمنة، وأهمية المنظار العلوي للتشخيص.</p>
+                </div>
+                <a href="gastric-cardia-cancer.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 7 -->
+            <div class="article-card">
+                <div>
+                    <h3>أورام العمود الفقري</h3>
+                    <p>الأنواع المختلفة للأورام الفقارية وداخل الجافية، خصائص آلام الظهر التحذيرية، ودور الرنين المغناطيسي.</p>
+                </div>
+                <a href="spinal-tumors.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 8 -->
+            <div class="article-card">
+                <div>
+                    <h3>كيفية تشخيص سرطان الرئة</h3>
+                    <p>الخطوات المتدرجة من الأشعة السينية والمقطعية وصولاً إلى الخزعة الموجهة وفحص علم الأمراض الجزيئي.</p>
+                </div>
+                <a href="lung-cancer-diagnosis.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 9 -->
+            <div class="article-card">
+                <div>
+                    <h3>أعراض صداع الأورام</h3>
+                    <p>الخصائص المميزة لصداع الدماغ (التفاقم الصباحي، الارتباط بالسعال، والغثيان) مقارنة بالصداع العادي.</p>
+                </div>
+                <a href="brain-tumor-headache.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 10 -->
+            <div class="article-card">
+                <div>
+                    <h3>الأعراض المبكرة لسرطان الثدي</h3>
+                    <p>دليل تفصيلي للكتل الصلبة، تغيرات الجلد (قشر البرتقال)، وأهمية الفحص الذاتي والماموجرام.</p>
+                </div>
+                <a href="breast-cancer-early-symptoms.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 11 -->
+            <div class="article-card">
+                <div>
+                    <h3>سرطان الرئة، أعراضه وأسبابه</h3>
+                    <p>استعراض متكامل للمسببات الرئيسية كالتدخين والتدخين السلبي، والأعراض التنفسية المزمنة.</p>
+                </div>
+                <a href="lung-cancer-causes-symptoms.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 12 -->
+            <div class="article-card">
+                <div>
+                    <h3>ما هو سبب ألم أسفل البطن</h3>
+                    <p>دليل تفريقي شامل لاضطرابات الهضم، المسالك البولية، والحالات النسائية الطارئة.</p>
+                </div>
+                <a href="lower-abdominal-pain.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 13 -->
+            <div class="article-card">
+                <div>
+                    <h3>علاج ديدان البطن بالثوم</h3>
+                    <p>دور مركب الأليسين الطبيعي في طرد الطفيليات المعوية، طرق الاستخدام الآمن، والمحاذير الطبية.</p>
+                </div>
+                <a href="garlic-intestinal-worms.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 14 -->
+            <div class="article-card">
+                <div>
+                    <h3>تمزق عضلات البطن</h3>
+                    <p>درجات الإصابة العضلية الناتجة عن المجهود أو السعال، وبروتوكول التعافي والراحة المنزلية.</p>
+                </div>
+                <a href="abdominal-muscle-tear.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 15 -->
+            <div class="article-card">
+                <div>
+                    <h3>كيفية غسيل المعدة</h3>
+                    <p>شرح طبي دقيق لإجراءات الطوارئ والتسمم في المستشفيات والمحاذير الخطيرة للاستخدام المنزلي.</p>
+                </div>
+                <a href="gastric-lavage.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 16 -->
+            <div class="article-card">
+                <div>
+                    <h3>أسباب القرحة الهضمية</h3>
+                    <p>دور العدوى ببكتيريا هيليكوباكتر بيلوري (الجرثومة الحلزونية) ومسكنات الألم في تآكل بطانة المعدة.</p>
+                </div>
+                <a href="peptic-ulcer-causes.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 17 -->
+            <div class="article-card">
+                <div>
+                    <h3>ما علاج حموضة المعدة</h3>
+                    <p>طرق تخفيف الحموضة منزلياً، العلاجات الدوائية، وتعديلات نمط الحياة لمنع الارتجاع المريئي.</p>
+                </div>
+                <a href="acid-reflux-treatment.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+            <!-- 18 -->
+            <div class="article-card">
+                <div>
+                    <h3>التهاب الأمعاء</h3>
+                    <p>أنواع الالتهابات الحادة (الميكروبية والفيروسية) والمزمنة (مرض كرون والقولون التقرحي) وطرق علاجها.</p>
+                </div>
+                <a href="enteritis.html" class="read-more">قراءة المقال كاملًا</a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; لمدونة صحيح (heib12.com) - 2026</p>
+    </footer>
+
+</body>
+</html>

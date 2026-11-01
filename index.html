@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع صحيح - الموسوعة الطبية الشاملة</title>
+    <!-- سكريبت إعلانات جوجل أدسنس الرئيسي -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2244311957196913" crossorigin="anonymous"></script>
     <style>
         :root {
             --primary-color: #0d6efd;
@@ -100,7 +102,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         .article-card {
             background: var(--card-bg);
@@ -157,6 +159,17 @@
         }
         .read-more:hover {
             background-color: #0b5ed7;
+        }
+
+        /* حاوية الإعلان الرئيسي في الصفحة الرئيسية */
+        .home-ad-wrapper {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
         }
 
         /* نافذة العرض المنبثقة (Modal) */
@@ -219,6 +232,16 @@
             padding-bottom: 8px;
         }
 
+        /* تنسيق حاوية الإعلان داخل المقال */
+        .article-ad-container {
+            margin: 30px 0;
+            text-align: center;
+            background: #fdfdfd;
+            padding: 15px;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+        }
+
         /* تذييل الموقع (Footer) */
         footer {
             text-align: center;
@@ -264,6 +287,19 @@
     <div class="container">
         <h2 class="section-title">أرشيف المقالات الطبية الموسوعية</h2>
         <div class="articles-grid" id="articlesGrid"></div>
+
+        <!-- الإعلان الثاني (الصوري التلقائي المستجيب) في الصفحة الرئيسية -->
+        <div class="home-ad-wrapper">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2244311957196913"
+                 data-ad-slot="1423332571"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </div>
 
     <!-- نافذة العرض المنبثقة -->
@@ -286,7 +322,22 @@
     </footer>
 
     <script>
-        // قاعدة البيانات المتكاملة للمقالات (كلما أضفت مقالاً جديداً هنا، سيظهر تلقائياً في الموقع وفي شريط آخر المقالات)
+        // كود الإعلان الأول (داخل المقال - In-Article)
+        const adCodeHTML = `
+            <div class="article-ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-2244311957196913"
+                     data-ad-slot="4049495912"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                <\/script>
+            </div>
+        `;
+
+        // قاعدة البيانات المتكاملة للمقالات الخمسة
         const articlesData = [
             {
                 title: "كيف تتخلص من وجع البطن",
@@ -297,6 +348,9 @@
                     <p>يُعد <strong>وجع البطن (Abdominal Pain)</strong> واحداً من أكثر الأعراض الطبية شيوعاً التي تدفع المرضى لطلب المشورة الطبية. ونظراً لأن جوف البطن يضم شبكة معقدة ومتشابكة من الأعضاء الحيوية، فإن النهج العلاجي لا يعتمد على مسكنات الألم عشوائياً، بل ينطلق حصراً من <strong>التشخيص الدقيق للمسبب الأساسي</strong>.</p>
                     <h3>أولاً: تقلصات المعدة والانتفاخ (اضطرابات الغازات)</h3>
                     <p>تظهر تقلصات المعدة والانتفاخ غالباً نتيجة احتباس الغازات الفيزيائي داخل التجويف المعوي وتترافق مع شعور بالضغط الناتج عن ابتلاع الهواء أو التخمر البكتيري. تستخدم مضادات التشنج مثل <em>البوتيل-سكوبول-أمين</em> و<em>الميبيفيرين</em> لإرخاء العضلات الملساء.</p>
+                    
+                    ${adCodeHTML}
+
                     <h3>ثانياً: الآلام المفاجئة والحادة (حالات طارئة)</h3>
                     <p>تشمل التهاب الزائدة الدودية (ألم في الجهة السفلى اليمنى يستوجب الاستئصال الفوري)، التهاب المرارة الحاد، الحصى الكلوية، والتهاب الردب.</p>
                     <h3>ثالثاً: آلام البطن المزمنة</h3>
@@ -316,6 +370,9 @@
                         <li><strong>العمر والجنس:</strong> ترتفع الإصابة لمن هم فوق 60 عاماً، وتكون أكثر لدى الرجال.</li>
                         <li><strong>أمراض الاستقلاب:</strong> ارتفاع ضغط الدم المزمن، السكري، وتصلب الشرايين.</li>
                     </ul>
+
+                    ${adCodeHTML}
+
                     <h3>ثانياً: المخاطر الطبية الكبرى</h3>
                     <p>تكمن الخطورة الكبرى في خطر <strong>تمزق الشريان (Rupture)</strong> أو تسلخه، وهو ما قد يسبب نزيفاً داخلياً خطيراً يستدعي التدخل الجراحي الفوري.</p>
                 `
@@ -329,6 +386,9 @@
                     <p>تُعرف <strong>حموضة المعدة (Heartburn)</strong> أو حرقة الفؤاد على أنها إحساس مزعج بالحرقة والاحتراق في منطقة أسفل الصدر، غالباً ما يترافق مع مذاق حامض أو مرّ في الفم، وتتفاقم عادةً أثناء الاستلقاء أو بعد الوجبات الدسمة.</p>
                     <h3>أولاً: الأعراض الإكلينيكية</h3>
                     <p>حرقة خلف عظمة القص، آلام تشتد عند الانحناء، طعم حامضي في الفم، واضطرابات وصعوبة في البلع.</p>
+                    
+                    ${adCodeHTML}
+
                     <h3>ثانياً: متى تستدعي الطوارئ؟</h3>
                     <p>يجب الحذر واستبعاد <strong>النوبة القلبية (Heart Attack)</strong> فوراً في حال رافق ألم الصدر ضيق في التنفس أو امتداد للألم نحو الذراع والفك.</p>
                 `
@@ -346,6 +406,8 @@
                         <li><strong>الأمراض:</strong> داء السكري، قصور الغدة الدرقية، القلق والاكتئاب، ومتلازمة القولون العصبي (IBS-C).</li>
                         <li><strong>الأدوية والحمل:</strong> الآثار الجانبية للمسكنات الأفيونية، ومدرات البول، وتأثير هرمون البروجستيرون أثناء الحمل.</li>
                     </ul>
+
+                    ${adCodeHTML}
                 `
             },
             {
@@ -357,6 +419,9 @@
                     <p>يُعد التزامن بين <strong>الدوخة والصداع</strong> عرضاً إكلينيكياً يستدعي الانتباه الطبي الدقيق. فرغم أن بعض الحالات تكون مرتبطة بنمط الحياة أو إجهاد مؤقت، إلا أن تكرارها يتطلب استقصاءً سريراً شاملاً لاستبعاد الأسباب العضوية الكامنة.</p>
                     <h3>أولاً: الشقيقة (الصداع النصفي) والعدوى</h3>
                     <p>يترافق الصداع النصفي غالباً مع خفقان في جانب واحد من الرأس مصحوباً بالدوخة واضطرابات الرؤية. كما أن الالتهابات الفيروسية والبكتيرية (كالإنفلونزا والتهابات الجيوب الأنفية) تسبب إرهاقاً عاماً وصداعاً مصحوباً بالدوار.</p>
+                    
+                    ${adCodeHTML}
+
                     <h3>ثانياً: إصابات الدماغ، الجفاف، وتقلبات السكر</h3>
                     <ul>
                         <li><strong>إصابات الرأس والارتجاج:</strong> تسبب صداعاً مستمراً ودوخة تعيق الأنشطة اليومية.</li>
@@ -369,22 +434,20 @@
             }
         ];
 
-        // تعبئة شريط آخر المقالات تلقائياً (آخر 5 مقالات مع تكرارها لسلاسة الحركة)
+        // تعبئة شريط آخر المقالات تلقائياً (آخر 5 مقالات)
         const ticker = document.getElementById('tickerContent');
-        const latestArticles = articlesData.slice(-5).reverse(); // أخذ آخر 5 مقالات وعكسها لتبدأ بالأحدث
+        const latestArticles = articlesData.slice(-5).reverse();
         
-        // نكرر المحتوى مرتين لضمان سلاسة حركة الـ Marquee بدون انقطاع
         let tickerHTML = '';
         for (let i = 0; i < 2; i++) {
             latestArticles.forEach((art) => {
-                // نبحث عن مؤشر المقال الحقيقي في المصفوفة الأصلية لفتح المودال الصحيح عند النقر
                 const originalIndex = articlesData.findIndex(a => a.title === art.title);
                 tickerHTML += `<span onclick="openModal(${originalIndex})">• ${art.title}</span>`;
             });
         }
         ticker.innerHTML = tickerHTML;
 
-        // تعبئة بطاقات المقالات في الصفحة (تعرض جميع المقالات المضافة بالترتيب)
+        // تعبئة بطاقات المقالات في الصفحة الرئيسية
         const grid = document.getElementById('articlesGrid');
         articlesData.forEach((art, index) => {
             const card = document.createElement('div');
@@ -416,6 +479,13 @@
             modalBody.innerHTML = articlesData[index].content;
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+
+            // تفعيل إعلانات أدسنس داخل النافذة المنبثقة
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.log("Adsbygoogle error: ", e);
+            }
         }
 
         function openPrivacyPolicy() {

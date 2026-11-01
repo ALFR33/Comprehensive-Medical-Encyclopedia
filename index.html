@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدونة صحيح - الموسوعة الطبية الشاملة</title>
+    <title>موقع صحيح - الموسوعة الطبية الشاملة</title>
     <style>
         :root {
             --primary-color: #0d6efd;
             --secondary-color: #2c3e50;
             --bg-color: #f8f9fa;
             --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #e2e8f0;
+            --text-color: #212529;
+            --border-color: #cbd5e1;
         }
         body {
             font-family: 'Cairo', Tahoma, sans-serif;
@@ -24,7 +24,7 @@
         header {
             background: linear-gradient(135deg, #2c3e50, #1a252f);
             color: #ffffff;
-            padding: 3rem 1rem;
+            padding: 3rem 1rem 2rem 1rem;
             text-align: center;
             border-bottom: 4px solid var(--primary-color);
         }
@@ -37,6 +37,53 @@
             color: #cbd5e1;
             font-size: 1.2rem;
         }
+
+        /* شريط آخر المقالات التلقائي الاحترافي */
+        .latest-ticker {
+            background-color: #1e293b;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            border-bottom: 1px solid #334155;
+            font-size: 0.95rem;
+        }
+        .ticker-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 15px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        .ticker-container {
+            overflow: hidden;
+            width: 100%;
+            white-space: nowrap;
+        }
+        .ticker-content {
+            white-space: nowrap;
+            display: inline-block;
+            animation: ticker 25s linear infinite;
+        }
+        .ticker-content span {
+            margin-left: 40px;
+            color: #94a3b8;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+        .ticker-content span:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -58,8 +105,8 @@
         .article-card {
             background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid var(--border-color);
             display: flex;
@@ -68,22 +115,35 @@
         }
         .article-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+        }
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .article-card h3 {
             color: var(--secondary-color);
             margin-top: 0;
-            font-size: 1.35rem;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 12px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
         }
         .article-card p {
-            color: #64748b;
+            color: #334155;
             font-size: 0.95rem;
             margin-bottom: 20px;
+            font-weight: 500;
         }
         .read-more {
-            display: inline-block;
+            display: block;
             background-color: var(--primary-color);
             color: #fff;
             padding: 10px 20px;
@@ -91,201 +151,320 @@
             text-decoration: none;
             font-weight: bold;
             text-align: center;
+            cursor: pointer;
+            border: none;
             transition: background-color 0.2s;
         }
         .read-more:hover {
             background-color: #0b5ed7;
         }
+
+        /* نافذة العرض المنبثقة (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 4% auto;
+            padding: 35px;
+            border-radius: 12px;
+            max-width: 800px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            line-height: 2;
+        }
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            left: 25px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #000;
+        }
+        .modal-img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .modal-title {
+            color: var(--secondary-color);
+            margin-top: 0;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        .modal-body {
+            color: #222;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+        .modal-body h3 {
+            color: var(--secondary-color);
+            margin-top: 25px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        /* تذييل الموقع (Footer) */
         footer {
             text-align: center;
-            padding: 25px;
+            padding: 30px 20px;
             background-color: #2c3e50;
             color: #ffffff;
             margin-top: 60px;
             font-size: 0.95rem;
+            border-top: 4px solid var(--primary-color);
+        }
+        .footer-links {
+            margin-top: 15px;
+        }
+        .footer-links a {
+            color: #93c5fd;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #ffffff;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>مدونة صحيح (heib12.com)</h1>
-        <p>الموسوعة العلمية الطبية الشاملة - إشراف ومراجعة: heib12</p>
+        <h1>موقع صحيح (heib12.com)</h1>
+        <p>الموسوعة العلمية الطبية الشاملة - إشراف ومراجعة: صالح الهيب كليل</p>
     </header>
+
+    <!-- شريط آخر المقالات التلقائي -->
+    <div class="latest-ticker">
+        <div class="ticker-title">آخر المقالات:</div>
+        <div class="ticker-container">
+            <div class="ticker-content" id="tickerContent"></div>
+        </div>
+    </div>
 
     <div class="container">
         <h2 class="section-title">أرشيف المقالات الطبية الموسوعية</h2>
-        
-        <div class="articles-grid">
-            
-            <!-- 1 -->
-            <div class="article-card">
-                <div>
-                    <h3>علاج سرطان الكبد</h3>
-                    <p>دليل شامل حول الخيارات الجراحية، العلاجات الموضعية الموجهة، والعلاجات الجهازية الحديثة والمناعية لسرطان الكبد.</p>
-                </div>
-                <a href="liver-cancer-treatment.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
+        <div class="articles-grid" id="articlesGrid"></div>
+    </div>
 
-            <!-- 2 -->
-            <div class="article-card">
-                <div>
-                    <h3>سرطان الدم عند الأطفال</h3>
-                    <p>موسوعة علمية حول أنواع اللوكيميا، الأعراض التحذيرية المبكرة، ونسب الشفاء المرتفعة بفضل البروتوكولات الحديثة.</p>
-                </div>
-                <a href="pediatric-leukemia.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 3 -->
-            <div class="article-card">
-                <div>
-                    <h3>أعراض سرطان الأمعاء</h3>
-                    <p>العلامات التحذيرية المبكرة لتغيرات الإخراج، النزيف الخفي، وأهمية تنظير القولون للاكتشاف المبكر.</p>
-                </div>
-                <a href="intestinal-cancer-symptoms.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 4 -->
-            <div class="article-card">
-                <div>
-                    <h3>أعراض سرطان الخصية</h3>
-                    <p>دليل توعوي حول الكتل الصلبة، الفحص الذاتي المنتظم، والفرق بين الحالات الحميدة والأورام الخبيثة.</p>
-                </div>
-                <a href="testicular-cancer-symptoms.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 5 -->
-            <div class="article-card">
-                <div>
-                    <h3>ما هو سرطان البروستاتا</h3>
-                    <p>تعريف شامل بغدة البروستاتا، أعراض تضيق مجرى البول، فحوصات دلالات الأورام، والخيارات العلاجية.</p>
-                </div>
-                <a href="prostate-cancer.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 6 -->
-            <div class="article-card">
-                <div>
-                    <h3>أعراض سرطان فم المعدة</h3>
-                    <p>استعراض دقيق لأعراض المنطقة الفؤادية، صعوبة البلع المزمنة، وأهمية المنظار العلوي للتشخيص.</p>
-                </div>
-                <a href="gastric-cardia-cancer.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 7 -->
-            <div class="article-card">
-                <div>
-                    <h3>أورام العمود الفقري</h3>
-                    <p>الأنواع المختلفة للأورام الفقارية وداخل الجافية، خصائص آلام الظهر التحذيرية، ودور الرنين المغناطيسي.</p>
-                </div>
-                <a href="spinal-tumors.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 8 -->
-            <div class="article-card">
-                <div>
-                    <h3>كيفية تشخيص سرطان الرئة</h3>
-                    <p>الخطوات المتدرجة من الأشعة السينية والمقطعية وصولاً إلى الخزعة الموجهة وفحص علم الأمراض الجزيئي.</p>
-                </div>
-                <a href="lung-cancer-diagnosis.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 9 -->
-            <div class="article-card">
-                <div>
-                    <h3>أعراض صداع الأورام</h3>
-                    <p>الخصائص المميزة لصداع الدماغ (التفاقم الصباحي، الارتباط بالسعال، والغثيان) مقارنة بالصداع العادي.</p>
-                </div>
-                <a href="brain-tumor-headache.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 10 -->
-            <div class="article-card">
-                <div>
-                    <h3>الأعراض المبكرة لسرطان الثدي</h3>
-                    <p>دليل تفصيلي للكتل الصلبة، تغيرات الجلد (قشر البرتقال)، وأهمية الفحص الذاتي والماموجرام.</p>
-                </div>
-                <a href="breast-cancer-early-symptoms.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 11 -->
-            <div class="article-card">
-                <div>
-                    <h3>سرطان الرئة، أعراضه وأسبابه</h3>
-                    <p>استعراض متكامل للمسببات الرئيسية كالتدخين والتدخين السلبي، والأعراض التنفسية المزمنة.</p>
-                </div>
-                <a href="lung-cancer-causes-symptoms.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 12 -->
-            <div class="article-card">
-                <div>
-                    <h3>ما هو سبب ألم أسفل البطن</h3>
-                    <p>دليل تفريقي شامل لاضطرابات الهضم، المسالك البولية، والحالات النسائية الطارئة.</p>
-                </div>
-                <a href="lower-abdominal-pain.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 13 -->
-            <div class="article-card">
-                <div>
-                    <h3>علاج ديدان البطن بالثوم</h3>
-                    <p>دور مركب الأليسين الطبيعي في طرد الطفيليات المعوية، طرق الاستخدام الآمن، والمحاذير الطبية.</p>
-                </div>
-                <a href="garlic-intestinal-worms.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 14 -->
-            <div class="article-card">
-                <div>
-                    <h3>تمزق عضلات البطن</h3>
-                    <p>درجات الإصابة العضلية الناتجة عن المجهود أو السعال، وبروتوكول التعافي والراحة المنزلية.</p>
-                </div>
-                <a href="abdominal-muscle-tear.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 15 -->
-            <div class="article-card">
-                <div>
-                    <h3>كيفية غسيل المعدة</h3>
-                    <p>شرح طبي دقيق لإجراءات الطوارئ والتسمم في المستشفيات والمحاذير الخطيرة للاستخدام المنزلي.</p>
-                </div>
-                <a href="gastric-lavage.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 16 -->
-            <div class="article-card">
-                <div>
-                    <h3>أسباب القرحة الهضمية</h3>
-                    <p>دور العدوى ببكتيريا هيليكوباكتر بيلوري (الجرثومة الحلزونية) ومسكنات الألم في تآكل بطانة المعدة.</p>
-                </div>
-                <a href="peptic-ulcer-causes.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 17 -->
-            <div class="article-card">
-                <div>
-                    <h3>ما علاج حموضة المعدة</h3>
-                    <p>طرق تخفيف الحموضة منزلياً، العلاجات الدوائية، وتعديلات نمط الحياة لمنع الارتجاع المريئي.</p>
-                </div>
-                <a href="acid-reflux-treatment.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
-            <!-- 18 -->
-            <div class="article-card">
-                <div>
-                    <h3>التهاب الأمعاء</h3>
-                    <p>أنواع الالتهابات الحادة (الميكروبية والفيروسية) والمزمنة (مرض كرون والقولون التقرحي) وطرق علاجها.</p>
-                </div>
-                <a href="enteritis.html" class="read-more">قراءة المقال كاملًا</a>
-            </div>
-
+    <!-- نافذة العرض المنبثقة -->
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img id="modalImg" class="modal-img" src="" alt="صورة المقال">
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <div id="modalBody" class="modal-body"></div>
         </div>
     </div>
 
     <footer>
-        <p>جميع الحقوق محفوظة &copy; لمدونة صحيح (heib12.com) - 2026</p>
+        <p>جميع الحقوق محفوظة &copy; لموقع صحيح (heib12.com) - 2026</p>
+        <div class="footer-links">
+            <a onclick="openPrivacyPolicy()">سياسة الخصوصية</a>
+            <a onclick="openPrivacyPolicy()">اتفاقية الاستخدام</a>
+            <a onclick="openPrivacyPolicy()">من نحن</a>
+        </div>
     </footer>
 
+    <script>
+        // قاعدة البيانات المتكاملة للمقالات (كلما أضفت مقالاً جديداً هنا، سيظهر تلقائياً في الموقع وفي شريط آخر المقالات)
+        const articlesData = [
+            {
+                title: "كيف تتخلص من وجع البطن",
+                desc: "دليل أكاديمي موسوعي حول أسباب أوجاع البطن، تقلصات المعدة، الحالات الطارئة كالزائدة الدودية، وطرق العلاج السريري.",
+                image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80",
+                content: `
+                    <h2>مقدمة وتحليل علمي</h2>
+                    <p>يُعد <strong>وجع البطن (Abdominal Pain)</strong> واحداً من أكثر الأعراض الطبية شيوعاً التي تدفع المرضى لطلب المشورة الطبية. ونظراً لأن جوف البطن يضم شبكة معقدة ومتشابكة من الأعضاء الحيوية، فإن النهج العلاجي لا يعتمد على مسكنات الألم عشوائياً، بل ينطلق حصراً من <strong>التشخيص الدقيق للمسبب الأساسي</strong>.</p>
+                    <h3>أولاً: تقلصات المعدة والانتفاخ (اضطرابات الغازات)</h3>
+                    <p>تظهر تقلصات المعدة والانتفاخ غالباً نتيجة احتباس الغازات الفيزيائي داخل التجويف المعوي وتترافق مع شعور بالضغط الناتج عن ابتلاع الهواء أو التخمر البكتيري. تستخدم مضادات التشنج مثل <em>البوتيل-سكوبول-أمين</em> و<em>الميبيفيرين</em> لإرخاء العضلات الملساء.</p>
+                    <h3>ثانياً: الآلام المفاجئة والحادة (حالات طارئة)</h3>
+                    <p>تشمل التهاب الزائدة الدودية (ألم في الجهة السفلى اليمنى يستوجب الاستئصال الفوري)، التهاب المرارة الحاد، الحصى الكلوية، والتهاب الردب.</p>
+                    <h3>ثالثاً: آلام البطن المزمنة</h3>
+                    <p>مثل داء الأمعاء الالتهابي (كرون والقولون التقرحي)، متلازمة الأمعاء المتهيّجة (IBS)، وعدوى المسالك البولية والإمساك المزمن.</p>
+                `
+            },
+            {
+                title: "أسباب نبض البطن وتمدد الشريان الأبهر",
+                desc: "دراسة أكاديمية موسوعية حول ظاهرة نبض البطن، ارتباطها بالشريان الأورطي، عوامل خطر تمدد الأوعية، والمخاطر الطبية.",
+                image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
+                content: `
+                    <h2>مقدمة وتحليل علمي</h2>
+                    <p>يُعد <strong>نبض البطن (Abdominal Pulsation)</strong> ظاهرة قد يشعر بها البعض أحياناً، وعادةً ما ترتبط ارتباطاً وثيقاً بنبض <strong>الشريان الأورطي (الأبهر)</strong>، وهو أكبر شريان رئيسي يمر عبر تجويف البطن. في بعض الحالات، قد يكون هذا النبض دلالة على حالة طبية تُعرف بـ <strong>تمدد الأوعية الدموية الأبهرية البطنية (AAA)</strong>.</p>
+                    <h3>أولاً: عوامل الخطر الرئيسية</h3>
+                    <ul>
+                        <li><strong>التدخين:</strong> المسبب الأبرز لضعف وتمدد جدران الشرايين.</li>
+                        <li><strong>العمر والجنس:</strong> ترتفع الإصابة لمن هم فوق 60 عاماً، وتكون أكثر لدى الرجال.</li>
+                        <li><strong>أمراض الاستقلاب:</strong> ارتفاع ضغط الدم المزمن، السكري، وتصلب الشرايين.</li>
+                    </ul>
+                    <h3>ثانياً: المخاطر الطبية الكبرى</h3>
+                    <p>تكمن الخطورة الكبرى في خطر <strong>تمزق الشريان (Rupture)</strong> أو تسلخه، وهو ما قد يسبب نزيفاً داخلياً خطيراً يستدعي التدخل الجراحي الفوري.</p>
+                `
+            },
+            {
+                title: "أعراض حموضة المعدة والتدابير الوقائية",
+                desc: "موسوعة طبية شاملة حول حرقة المعدة، العلامات المميزة، الحالات التي تستدعي الطوارئ لاستبعاد النوبات القلبية، ونصائح تعديل النمط الغذائي.",
+                image: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=800&q=80",
+                content: `
+                    <h2>مقدمة وتحليل علمي</h2>
+                    <p>تُعرف <strong>حموضة المعدة (Heartburn)</strong> أو حرقة الفؤاد على أنها إحساس مزعج بالحرقة والاحتراق في منطقة أسفل الصدر، غالباً ما يترافق مع مذاق حامض أو مرّ في الفم، وتتفاقم عادةً أثناء الاستلقاء أو بعد الوجبات الدسمة.</p>
+                    <h3>أولاً: الأعراض الإكلينيكية</h3>
+                    <p>حرقة خلف عظمة القص، آلام تشتد عند الانحناء، طعم حامضي في الفم، واضطرابات وصعوبة في البلع.</p>
+                    <h3>ثانياً: متى تستدعي الطوارئ؟</h3>
+                    <p>يجب الحذر واستبعاد <strong>النوبة القلبية (Heart Attack)</strong> فوراً في حال رافق ألم الصدر ضيق في التنفس أو امتداد للألم نحو الذراع والفك.</p>
+                `
+            },
+            {
+                title: "أسباب الإمساك المزمن وآلياته الفسيولوجية",
+                desc: "دليل أكاديمي موسوعي حول أسباب الإمساك المزمن، المرتبطة بأسلوب الحياة، الأمراض الباطنية والعصبية، الآثار الجانبية للأدوية، وفترة الحمل.",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+                content: `
+                    <h2>مقدمة وتحليل علمي</h2>
+                    <p>يُعرّف الإمساك إكلينيكياً بانخفاض معدل الإخراج عن ثلاث مرات أسبوعياً. أمّا <strong>الإمساك المزمن</strong> فهو حالة مرضية ممتدة لعدة أسابيع تترابط باضطرابات حركية القناة الهضمية.</p>
+                    <h3>أولاً: الأسباب والعوامل المسببة</h3>
+                    <ul>
+                        <li><strong>نمط الحياة:</strong> سوء التغذية وفقر الأطعمة بالألياف، الجفاف، والخمول البدني.</li>
+                        <li><strong>الأمراض:</strong> داء السكري، قصور الغدة الدرقية، القلق والاكتئاب، ومتلازمة القولون العصبي (IBS-C).</li>
+                        <li><strong>الأدوية والحمل:</strong> الآثار الجانبية للمسكنات الأفيونية، ومدرات البول، وتأثير هرمون البروجستيرون أثناء الحمل.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "أسباب الدوخة والصداع والاضطرابات العصبية المرتبطة",
+                desc: "دراسة موسوعة متكاملة حول التزامن بين الصداع والدوخة، أسباب الشقيقة، العدوى، إصابات الدماغ، واضطرابات الضغط وسكر الدم.",
+                image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80",
+                content: `
+                    <h2>مقدمة وتحليل علمي</h2>
+                    <p>يُعد التزامن بين <strong>الدوخة والصداع</strong> عرضاً إكلينيكياً يستدعي الانتباه الطبي الدقيق. فرغم أن بعض الحالات تكون مرتبطة بنمط الحياة أو إجهاد مؤقت، إلا أن تكرارها يتطلب استقصاءً سريراً شاملاً لاستبعاد الأسباب العضوية الكامنة.</p>
+                    <h3>أولاً: الشقيقة (الصداع النصفي) والعدوى</h3>
+                    <p>يترافق الصداع النصفي غالباً مع خفقان في جانب واحد من الرأس مصحوباً بالدوخة واضطرابات الرؤية. كما أن الالتهابات الفيروسية والبكتيرية (كالإنفلونزا والتهابات الجيوب الأنفية) تسبب إرهاقاً عاماً وصداعاً مصحوباً بالدوار.</p>
+                    <h3>ثانياً: إصابات الدماغ، الجفاف، وتقلبات السكر</h3>
+                    <ul>
+                        <li><strong>إصابات الرأس والارتجاج:</strong> تسبب صداعاً مستمراً ودوخة تعيق الأنشطة اليومية.</li>
+                        <li><strong>الجفاف ونقص السوائل:</strong> يؤدي نقص التروية وانخفاض السوائل إلى صداع ودوار حاد.</li>
+                        <li><strong>انخفاض سكر الدم وفقر الدم:</strong> يؤديان لخلل في إمدادات الأكسجين والجلوكوز لخلايا الدماغ.</li>
+                    </ul>
+                    <h3>ثالثاً: حالات طارئة تستدعي التدخل الفوري</h3>
+                    <p>في حالات نادرة، قد يدل الصداع الحاد والدوخة المفاجئة على حالات خطيرة مثل <strong>تمدد الأوعية الدموية الدماغي (Aneurysm)</strong> أو <strong>السكتة الدماغية (Stroke)</strong>، والتي تتطلب الطوارئ الطبية الفورية في حال رافقها اضطرابات في النطق أو ضعف مفاجئ في الأطراف.</p>
+                `
+            }
+        ];
+
+        // تعبئة شريط آخر المقالات تلقائياً (آخر 5 مقالات مع تكرارها لسلاسة الحركة)
+        const ticker = document.getElementById('tickerContent');
+        const latestArticles = articlesData.slice(-5).reverse(); // أخذ آخر 5 مقالات وعكسها لتبدأ بالأحدث
+        
+        // نكرر المحتوى مرتين لضمان سلاسة حركة الـ Marquee بدون انقطاع
+        let tickerHTML = '';
+        for (let i = 0; i < 2; i++) {
+            latestArticles.forEach((art) => {
+                // نبحث عن مؤشر المقال الحقيقي في المصفوفة الأصلية لفتح المودال الصحيح عند النقر
+                const originalIndex = articlesData.findIndex(a => a.title === art.title);
+                tickerHTML += `<span onclick="openModal(${originalIndex})">• ${art.title}</span>`;
+            });
+        }
+        ticker.innerHTML = tickerHTML;
+
+        // تعبئة بطاقات المقالات في الصفحة (تعرض جميع المقالات المضافة بالترتيب)
+        const grid = document.getElementById('articlesGrid');
+        articlesData.forEach((art, index) => {
+            const card = document.createElement('div');
+            card.className = 'article-card';
+            card.innerHTML = `
+                <div>
+                    <img src="${art.image}" alt="${art.title}" class="card-img">
+                    <div class="card-content">
+                        <h3>${art.title}</h3>
+                        <p>${art.desc}</p>
+                    </div>
+                </div>
+                <div style="padding: 0 20px 20px 20px;">
+                    <button class="read-more" onclick="openModal(${index})">قراءة المقال كاملًا</button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        const modal = document.getElementById('articleModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalImg = document.getElementById('modalImg');
+
+        function openModal(index) {
+            modalImg.style.display = 'block';
+            modalTitle.innerText = articlesData[index].title;
+            modalImg.src = articlesData[index].image;
+            modalBody.innerHTML = articlesData[index].content;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openPrivacyPolicy() {
+            modalImg.style.display = 'none';
+            modalTitle.innerText = "سياسة الخصوصية - موقع صحيح (heib12.com)";
+            modalBody.innerHTML = `
+                <p>مرحباً بكم في موقع <strong>صحيح (heib12.com)</strong>. نحن نولي اهتماماً بالغاً بحصوصية زوارنا، وتوضح وثيقة سياسة الخصوصية هذه أنواع المعلومات الشخصية التي يتم جمعها وكيفية استخدامها وحمايتها.</p>
+                <h3>1. جمع المعلومات وسجل الزيارات</h3>
+                <p>يسجل موقعنا عناوين بروتوكول الإنترنت (IP)، أنواع المتصفحات، ومزودي خدمات الإنترنت لتحسين تجربة التصفح وتحليل الأداء.</p>
+                <h3>2. ملفات تعريف الارتباط (Cookies)</h3>
+                <p>نستخدم ملفات تعريف الارتباط لتخزين معلومات تفضيلات الزوار وتخصيص محتوى الموقع بناءً على اهتماماتهم.</p>
+                <h3>3. إعلانات جوجل (Google AdSense)</h3>
+                <p>تستخدم جوجل ملفات تعريف الارتباط لعرض الإعلانات بناءً على زيارات المستخدمين لموقعنا والمواقع الأخرى.</p>
+                <h3>4. إخلاء المسؤولية الطبية</h3>
+                <p>المحتوى المنشور في الموقع هو لأغراض التثقيف والتوعية العلمية فقط، ولا يُغني عن الاستشارة الطبية التخصصية أو التشخيص المعتمد.</p>
+            `;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // --- خاصية الحماية الذكية وإضافة رابط الموقع والبصمة السرية عند النسخ ---
+        document.addEventListener('copy', function(e) {
+            const selection = window.getSelection();
+            if (selection.rangeCount === 0) return;
+            
+            const selectedText = selection.toString();
+            if (selectedText.length < 10) return;
+
+            e.preventDefault();
+            
+            const secretSignature = "\n\n--- [المصدر الأصلي: موقع صحيح] ---\n🔗 رابط المقال المعتمد: https://heib12.com\n🔒 حقوق النشر محفوظة © لصالح الهيب كليل - موقع صحيح (heib12.com) | معرف البصمة: [HEIB12-SECURE-AUTH-2026]";
+            
+            const modifiedText = selectedText + secretSignature;
+
+            if (e.clipboardData) {
+                e.clipboardData.setData('text/plain', modifiedText);
+            }
+        });
+    </script>
 </body>
 </html>
